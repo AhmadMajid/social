@@ -1,9 +1,11 @@
 class VibrationsController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     vibration = Vibration.new(vibration_params.merge(user: current_user))
 
     if vibration.save
-      redirect_to root_path
+      redirect_to dashboard_path
     end
   end
 

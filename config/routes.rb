@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   root "home#index"
 
   resources :vibrations, only: :create
+
+  get :dashboard, to: "dashboard#index"
 end
