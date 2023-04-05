@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :vibrations, dependent: :destroy
+
+  validates :username, uniqueness: { case_sensitive: false }, allow_blank: true
 end
