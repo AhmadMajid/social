@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "Usernames", type: :request do
-  let(:user) { create(:user) }
+  let(:user) { create(:user, username: nil) }
 
   before { sign_in user }
 
@@ -13,16 +13,30 @@ RSpec.describe "Usernames", type: :request do
   end
 
   describe "PUT update" do
-    it "updates the usernames" do
-      user.update username: nil
-      expect do
-        put username_path(user), params: {
-          user: {
-            username: "foobar"
+    context "valid params" do
+      it "updates the username" do
+        expect do
+          put username_path(user), params: {
+            user: {
+              username: "foobar"
+            }
           }
-        }
-      end.to change { user.reload.username }.from(nil).to("foobar")
-      expect(response).to redirect_to(dashboard_path)
+        end.to change { user.reload.username }.from(nil).to("foobar")
+        expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
+    context "invalid params" do
+      it "updates the username" do
+        expect do
+          put username_path(user), params: {
+            user: {
+              username: ""
+            }
+          }
+        end.not_to change { user.reload.username }
+        expect(response).to redirect_to(new_username_path)
+      end
     end
   end
 end
