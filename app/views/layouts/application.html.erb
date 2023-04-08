@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -5,15 +6,23 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body>
     <% if flash.any? %>
-        <%= render "shared/flashes" %>
-      <% end %>
-    <%= yield %>
+      <%= render "shared/flashes" %>
+    <% end %>
+    <% if user_signed_in? %>
+      <div class="container py-2">
+        <div class="row">
+          <%= render "shared/sidebar" %>
+          <%= yield %>
+        </div>
+      </div>
+    <% else %>
+      <%= yield %>
+    <% end %>
   </body>
 </html>
