@@ -1,4 +1,4 @@
-<%= form_with model: Vibration.new, url: vibrations_path, method: :post, local: true, class: "w-100" do |f| %>
+<%= form_with model: Vibration.new, url: vibrations_path, method: :post, class: "w-100", data: { controller: 'vibration-form' } do |f| %>
   <%= f.text_area :body, placeholder: "What's happening?", class: "form-control w-100 vibration-input mb-4" %>
   <div class="d-flex justify-content-end">
     <%= f.submit "Vibration", class: "btn btn-lg btn-social rounded-pill" %>
