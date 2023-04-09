@@ -1,0 +1,8 @@
+<div class="vibration py-3 px-4">
+  <% if (Time.zone.now - vibration.created_at) > 1.day %>
+    <p>@<%= vibration.user.username %> . <%= vibration.created_at.strftime("%b %-d") %></p>
+  <% else %>
+    <p>@<%= vibration.user.username %> . <%= time_ago_in_words(vibration.created_at) %></p>
+  <% end %>
+    <p class="mb-0"><%= vibration.body %></p>
+</div>
