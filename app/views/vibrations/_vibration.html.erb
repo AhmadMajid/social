@@ -31,9 +31,16 @@
           <% end %>
         </div>
         <div>
-          <%= link_to "#", class: "text-decoration-none text-black likes" do %>
-            <%= image_tag "heart-unfilled.png", size: "20x20", class: "me-1" %>
-            <span>Likes</span>
+          <% if vibration_presenter.likes.include?(current_user.likes.find_by(vibration: vibration_presenter.vibration)) %>
+            <%= link_to vibration_like_path(vibration_presenter.vibration, vibration_presenter.vibration.likes.find_by(user: current_user)), data: { "turbo-method": "delete" }, class: "text-decoration-none text-black likes" do %>
+              <%= image_tag "heart-filled.png", size: "20x20", class: "me-1" %>
+              <span><%= vibration_presenter.likes.size %></span>
+            <% end %>
+          <% else %>
+            <%= link_to vibration_likes_path(vibration_presenter.vibration), data: { "turbo-method": "post" }, class: "text-decoration-none text-black likes" do %>
+              <%= image_tag "heart-unfilled.png", size: "20x20", class: "me-1" %>
+              <span><%= vibration_presenter.likes.size %></span>
+            <% end %>
           <% end %>
         </div>
         <div>

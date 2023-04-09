@@ -7,7 +7,7 @@ class VibrationPresenter
 
   attr_reader :vibration
 
-  delegate :user, :body, to: :vibration
+  delegate :user, :body, :likes, to: :vibration
   delegate :display_name, :username, :avatar, to: :user
 
   def created_at

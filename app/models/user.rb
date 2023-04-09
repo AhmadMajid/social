@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
   has_many :vibrations, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :liked_vibrations, through: :likes, source: :vibration
 
   validates :username, uniqueness: { case_sensitive: false }, allow_blank: true
 
