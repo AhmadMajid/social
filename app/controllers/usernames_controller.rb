@@ -11,7 +11,7 @@ class UsernamesController < ApplicationController
       redirect_to dashboard_path
     else
       flash[:alert] = if username_params[:username].blank?
-                        "Please set a username"
+                        "Please set a username."
                       else
                         current_user.errors.full_messages.join(", ")
                       end
@@ -22,6 +22,6 @@ class UsernamesController < ApplicationController
   private
 
   def username_params
-    params.require(:user).permit(:username)
+    params.require(:user).permit(:username, :display_name)
   end
 end
