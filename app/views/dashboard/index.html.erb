@@ -5,7 +5,9 @@
   <div class="mb-4">
     <%= render "shared/vibration_form" %>
   </div>
-  <%= render Vibration.order(created_at: :desc) %>
+  <div id="vibrations">
+    <%= render Vibration.order(created_at: :desc) %>
+  </div>
 </div>
 <div class="col">
   Column
