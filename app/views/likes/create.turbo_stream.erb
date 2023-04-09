@@ -1,0 +1,3 @@
+<%= turbo_stream.replace dom_id(@vibration) do %>
+  <%= render partial: "vibrations/vibration", locals: { vibration_presenter: VibrationPresenter.new(@vibration) } %>
+<% end %>

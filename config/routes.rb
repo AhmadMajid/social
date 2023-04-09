@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#index"
 
-  resources :vibrations, only: :create
+  resources :vibrations, only: :create do
+    resources :likes, only: [:create, :destroy]
+  end
 
   get :dashboard, to: "dashboard#index"
 
