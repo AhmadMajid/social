@@ -6,7 +6,7 @@
     <%= render "shared/vibration_form" %>
   </div>
   <div id="vibrations">
-    <%= render Vibration.order(created_at: :desc) %>
+    <%= render partial: "vibrations/vibration", collection: @vibrations, as: :vibration_presenter %>
   </div>
 </div>
 <div class="col">
