@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_one_attached :avatar
   has_many :vibrations, dependent: :destroy
 
   validates :username, uniqueness: { case_sensitive: false }, allow_blank: true
