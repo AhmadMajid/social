@@ -10,7 +10,7 @@ class VibrationPresenter
   attr_reader :vibration, :current_user
 
   delegate :user, :body, :likes_count, :revibrations_count, to: :vibration
-  delegate :display_name, :username, :avatar, to: :user
+  delegate :display_name, :username, to: :user
 
   def created_at
     if (Time.zone.now - vibration.created_at) > 1.day
@@ -20,11 +20,17 @@ class VibrationPresenter
     end
   end
 
-  def like_vibration_url
+  def avatar
+    return user.avatar if user.avatar.present?
+
+    ActionController::Base.helpers.asset_path("user.png")
+  end
+
+  def like_vibration_url(source: "vibration_card")
     if vibration_liked_by_current_user?
-      vibration_like_path(vibration, current_user.likes.find_by(vibration: vibration))
+      vibration_like_path(vibration, current_user.likes.find_by(vibration: vibration), source: source)
     else
-      vibration_likes_path(vibration)
+      vibration_likes_path(vibration, source: source)
     end
   end
 
@@ -44,7 +50,7 @@ class VibrationPresenter
     end
   end
 
-  def bookmark_vibration_url(source: "dashboard/index")
+  def bookmark_vibration_url(source: "vibration_card")
     if vibration_bookmarked_by_current_user?
       vibration_bookmark_path(vibration, current_user.bookmarks.find_by(vibration: vibration), source: source)
     else
@@ -76,11 +82,11 @@ class VibrationPresenter
     end
   end
 
-  def revibration_vibration_url
+  def revibration_vibration_url(source: "vibration_card")
     if vibration_revibrationed_by_current_user?
-      vibration_revibration_path(vibration, current_user.revibrations.find_by(vibration: vibration))
+      vibration_revibration_path(vibration, current_user.revibrations.find_by(vibration: vibration), source: source)
     else
-      vibration_revibrations_path(vibration)
+      vibration_revibrations_path(vibration, source: source)
     end
   end
 

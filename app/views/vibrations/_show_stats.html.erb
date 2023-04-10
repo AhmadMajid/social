@@ -17,17 +17,17 @@
       <% end %>
     </div>
     <div>
-      <%= link_to vibration_presenter.revibration_vibration_url, data: { "turbo-method": vibration_presenter.turbo_revibration_data_method }, class: "text-decoration-none text-black revibrations" do %>
+      <%= link_to vibration_presenter.revibration_vibration_url(source: "vibration_show"), data: { "turbo-method": vibration_presenter.turbo_revibration_data_method }, class: "text-decoration-none text-black revibrations" do %>
         <%= image_tag vibration_presenter.revibration_image, size: "24x24", class: "me-1" %>
       <% end %>
     </div>
     <div>
-      <%= link_to vibration_presenter.like_vibration_url, data: { "turbo-method": vibration_presenter.turbo_like_data_method }, class: "text-decoration-none text-black likes" do %>
+      <%= link_to vibration_presenter.like_vibration_url(source: "vibration_show"), data: { "turbo-method": vibration_presenter.turbo_like_data_method }, class: "text-decoration-none text-black likes" do %>
         <%= image_tag vibration_presenter.like_heart_image, size: "24x24", class: "me-1" %>
       <% end %>
     </div>
     <div>
-      <%= link_to vibration_presenter.bookmark_vibration_url(source: "vibrations/show"), data: { "turbo-method": vibration_presenter.turbo_bookmark_data_method }, class: "text-decoration-none text-black bookmark" do %>
+      <%= link_to vibration_presenter.bookmark_vibration_url(source: "vibration_show"), data: { "turbo-method": vibration_presenter.turbo_bookmark_data_method }, class: "text-decoration-none text-black bookmark" do %>
         <%= image_tag vibration_presenter.bookmark_image, size: "24x24", class: "me-1" %>
       <% end %>
     </div>
