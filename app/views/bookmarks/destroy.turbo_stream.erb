@@ -1,4 +1,16 @@
-<% puts "\n\n\n\n\n\n\n\ninside delete\n\n\n\n\n\n\n\n\n"%>
-<%= turbo_stream.replace "vibration_stats" do %>
-  <%= render partial: "vibrations/show_stats", locals: { vibration_presenter: VibrationPresenter.new(vibration: @vibration.reload, current_user: current_user.reload) }%>
+<%
+  target_id = if params[:source] == "vibration_show"
+                "vibration_stats"
+              else
+                dom_id(@vibration)
+              end
+
+  partial_name = if params[:source] == "vibration_show"
+                   "vibrations/show_stats"
+                 else
+                   "vibrations/vibration"
+                 end
+%>
+<%= turbo_stream.replace target_id do %>
+  <%= render partial: partial_name, locals: { vibration_presenter: VibrationPresenter.new(vibration: @vibration.reload, current_user: current_user.reload) }%>
 <% end %>
