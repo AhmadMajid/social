@@ -9,7 +9,7 @@ class VibrationPresenter
 
   attr_reader :vibration, :current_user
 
-  delegate :user, :body, :likes_count, to: :vibration
+  delegate :user, :body, :likes_count, :revibrations_count, to: :vibration
   delegate :display_name, :username, :avatar, to: :user
 
   def created_at
@@ -76,6 +76,30 @@ class VibrationPresenter
     end
   end
 
+  def revibration_vibration_url
+    if vibration_revibrationed_by_current_user?
+      vibration_revibration_path(vibration, current_user.revibrations.find_by(vibration: vibration))
+    else
+      vibration_revibrations_path(vibration)
+    end
+  end
+
+  def turbo_revibration_data_method
+    if vibration_revibrationed_by_current_user?
+      "delete"
+    else
+      "post"
+    end
+  end
+
+  def revibration_image
+    if vibration_revibrationed_by_current_user?
+      "revibration-filled.png"
+    else
+      "revibration-unfilled.png"
+    end
+  end
+
   private
 
   def vibration_liked_by_current_user
@@ -87,4 +111,9 @@ class VibrationPresenter
     @vibration_bookmarked_by_current_user ||= vibration.bookmarked_users.include?(current_user)
   end
   alias_method :vibration_bookmarked_by_current_user?, :vibration_bookmarked_by_current_user
+
+  def vibration_revibrationed_by_current_user
+    @vibration_revibrationed_by_current_user ||= vibration.revibrationed_users.include?(current_user)
+  end
+  alias_method :vibration_revibrationed_by_current_user?, :vibration_revibrationed_by_current_user
 end
