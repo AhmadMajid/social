@@ -1,5 +1,5 @@
 <%= turbo_frame_tag dom_id(vibration_presenter.vibration) do %>
-  <div data-controller="vibration-card" data-vibration-path="<%= vibration_path(vibration_presenter.vibration) %>" class="vibration d-flex py-3 px-3">
+  <div data-controller="vibration-card" data-vibration-path="<%= vibration_path(vibration_presenter.vibration) %>" class="vibration hover d-flex py-3 px-3">
     <div class="flex-shrink-0">
       <%= image_tag vibration_presenter.avatar, size: "48x48", class: "rounded-circle" %>
     </div>
