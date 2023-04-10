@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '414251e947a19815f504accda8346dc68ed21f7e2b23a17988af4190b81b2ca142a4d616b24f47059cf35261fccb3ca8edb90e5d19be675e41df6a9e44ed2d8d'
+  # config.secret_key = 'e23a410d8dcf8d4adf13448e37cbbce651486f3796ab07289ea26fd25863dd3cf06845b8f6bea648480ea0c99f0b3de476b3ab6cc4b1758e4b251054a9f20721'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -126,7 +126,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '6508205bbdaf55b21167570bb04520318ea55c1ff6145a838a1f30a77fef26c007df70d7f31d4d81ef4a048d0f40fd0985b4f8255bef1dde65c8decb3e813295'
+  # config.pepper = '8536861172f245a90147de5cb981d4292971c9e0c1e53e4ee6c382d1561cb1d727d6139b02ce7bd6904cacc01f20b40cf9c35a8c751f0412ddca60d472d414ce'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -256,7 +256,7 @@ Devise.setup do |config|
 
   # ==> Navigation configuration
   # Lists the formats that should be treated as navigational. Formats like
-  # :html should redirect to the sign in page when the user does not have
+  # :html, should redirect to the sign in page when the user does not have
   # access, but formats like :xml or :json, should return 401.
   #
   # If you have any extra navigational formats, like :iphone or :mobile, you
@@ -296,14 +296,12 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
-  # ==> Hotwire/Turbo configuration
-  # When using Devise with Hotwire/Turbo, the http status for error responses
-  # and some redirects must match the following. The default in Devise for existing
-  # apps is `200 OK` and `302 Found respectively`, but new apps are generated with
-  # these new defaults that match Hotwire/Turbo behavior.
-  # Note: These might become the new default in future versions of Devise.
-  config.responder.error_status = :unprocessable_entity
-  config.responder.redirect_status = :see_other
+  # ==> Turbolinks configuration
+  # If your app is using Turbolinks, Turbolinks::Controller needs to be included to make redirection work correctly:
+  #
+  # ActiveSupport.on_load(:devise_failure_app) do
+  #   include Turbolinks::Controller
+  # end
 
   # ==> Configuration for :registerable
 
