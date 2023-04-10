@@ -8,6 +8,8 @@ RSpec.describe Vibration, type: :model do
   it { should have_many(:bookmarked_users).through(:bookmarks).source(:user) }
   it { should have_many(:revibrations).dependent(:destroy) }
   it { should have_many(:revibrationed_users).through(:revibrations).source(:user) }
+  it { should have_many(:views).dependent(:destroy) }
+  it { should have_many(:viewed_users).through(:views).source(:user) }
   it { should validate_presence_of(:body) }
   it { should validate_length_of(:body).is_at_most(280) }
 end
