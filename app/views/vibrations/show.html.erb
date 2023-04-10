@@ -2,8 +2,56 @@
   <div class="mb-3">
     <%= link_to :back, class: "fs-4 text-decoration-none text-black fw-semibold" do %>
       <%= image_tag "back-arrow.png", size: "28x28", class: "me-4" %>
-      <span style="position: relative; top: 2px;">Vibration</span>
+      <span style="position: relative; top: 2px;">vibration</span>
     <% end %>
+    <%= turbo_frame_tag dom_id(@vibration_presenter.vibration) do %>
+      <div data-controller="vibration-card" data-vibration-path="<%= vibration_path(@vibration_presenter.vibration) %>" class="vibration d-flex py-3 px-3">
+        <div class="flex-shrink-0">
+          <%= image_tag @vibration_presenter.avatar, size: "48x48", class: "rounded-circle" %>
+        </div>
+        <div class="flex-grow-1 ms-3">
+          <p class="fw-bolder mb-0"><%= @vibration_presenter.display_name %></p>
+          <p class="text-muted mb-1">@<%= @vibration_presenter.username %></p>
+          <p class="fs-2 mb-1"><%= @vibration_presenter.body %></p>
+          <p class="text-muted"><%= @vibration_presenter.vibration.created_at.strftime("%l:%M %p") %> · <%= @vibration_presenter.vibration.created_at.strftime("%b %d, %Y") %></p>
+
+          <div class="d-flex justify-content-start">
+            <div class="me-4">Views</div>
+            <div class="me-4"><span class="fw-bold"><%= @vibration_presenter.revibrations_count %></span> Revibrations</div>
+            <div class="me-4"><span class="fw-bold"><%= @vibration_presenter.likes_count %></span> Likes</div>
+          </div>
+
+          <div class="d-flex justify-content-evenly align-items-center action-links">
+            <div>
+              <%= link_to "#", data: { "ignore-click": true }, class: "text-decoration-none text-black views" do %>
+                <%= image_tag "bar-graph.png", size: "24x24", class: "me-1" %>
+              <% end %>
+            </div>
+            <div>
+              <%= link_to vibration_path(@vibration_presenter.vibration), data: { "ignore-click": true }, class: "text-decoration-none text-black replies" do %>
+                <%= image_tag "speech-bubble.png", size: "24x24", class: "me-1" %>
+              <% end %>
+            </div>
+            <div>
+              <%= link_to @vibration_presenter.revibration_vibration_url, data: { "ignore-click": true, "turbo-method": @vibration_presenter.turbo_revibration_data_method }, class: "text-decoration-none text-black revibrations" do %>
+                <%= image_tag @vibration_presenter.revibration_image, size: "24x24", class: "me-1" %>
+              <% end %>
+            </div>
+            <div>
+              <%= link_to @vibration_presenter.like_vibration_url, data: { "ignore-click": true, "turbo-method": @vibration_presenter.turbo_like_data_method }, class: "text-decoration-none text-black likes" do %>
+                <%= image_tag @vibration_presenter.like_heart_image, size: "24x24", class: "me-1" %>
+              <% end %>
+            </div>
+            <div>
+              <%= link_to @vibration_presenter.bookmark_vibration_url, data: { "ignore-click": true, "turbo-method": @vibration_presenter.turbo_bookmark_data_method }, class: "text-decoration-none text-black bookmark" do %>
+                <%= image_tag @vibration_presenter.bookmark_image, size: "24x24", class: "me-1" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
   </div>
 </div>
 <div class="col">
