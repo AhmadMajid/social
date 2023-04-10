@@ -28,7 +28,7 @@ class VibrationPresenter
     end
   end
 
-  def turbo_data_method
+  def turbo_like_data_method
     if vibration_liked_by_current_user?
       "delete"
     else
@@ -44,10 +44,47 @@ class VibrationPresenter
     end
   end
 
+  def bookmark_vibration_url
+    if vibration_bookmarked_by_current_user?
+      vibration_bookmark_path(vibration, current_user.bookmarks.find_by(vibration: vibration))
+    else
+      vibration_bookmarks_path(vibration)
+    end
+  end
+
+  def turbo_bookmark_data_method
+    if vibration_bookmarked_by_current_user?
+      "delete"
+    else
+      "post"
+    end
+  end
+
+  def bookmark_image
+    if vibration_bookmarked_by_current_user?
+      "bookmark-filled.png"
+    else
+      "bookmark-unfilled.png"
+    end
+  end
+
+  def bookmark_text
+    if vibration_bookmarked_by_current_user?
+      "Bookmarked"
+    else
+      "Bookmark"
+    end
+  end
+
   private
 
   def vibration_liked_by_current_user
     @vibration_liked_by_current_user ||= vibration.liked_users.include?(current_user)
   end
   alias_method :vibration_liked_by_current_user?, :vibration_liked_by_current_user
+
+  def vibration_bookmarked_by_current_user
+    @vibration_bookmarked_by_current_user ||= vibration.bookmarked_users.include?(current_user)
+  end
+  alias_method :vibration_bookmarked_by_current_user?, :vibration_bookmarked_by_current_user
 end
