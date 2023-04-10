@@ -2,8 +2,8 @@ class VibrationsController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @vibration = Vibration.find(params[:id])
-    @vibration_presenter = VibrationPresenter.new(vibration: @vibration, current_user: current_user)
+    create_view_record unless View.exists?(user: current_user, vibration: vibration)
+    @vibration_presenter = VibrationPresenter.new(vibration: vibration, current_user: current_user)
   end
 
   def create
@@ -21,5 +21,13 @@ class VibrationsController < ApplicationController
 
   def vibration_params
     params.require(:vibration).permit(:body)
+  end
+
+  def vibration
+    @vibration ||= Vibration.find(params[:id])
+  end
+
+  def create_view_record
+    View.create(vibration: vibration, user: current_user)
   end
 end

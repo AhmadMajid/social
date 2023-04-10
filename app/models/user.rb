@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :bookmarked_vibrations, through: :bookmarks, source: :vibration
   has_many :revibrations, dependent: :destroy
   has_many :revibrationed_vibrations, through: :revibrations, source: :vibration
+  has_many :views
+  has_many :viewed_vibrations, through: :views, source: :vibration
 
   validates :username, uniqueness: { case_sensitive: false }, allow_blank: true
 

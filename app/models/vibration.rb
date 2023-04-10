@@ -8,4 +8,6 @@ class Vibration < ApplicationRecord
   has_many :bookmarked_users, through: :bookmarks, source: :user
   has_many :revibrations, dependent: :destroy
   has_many :revibrationed_users, through: :revibrations, source: :user
+  has_many :views, dependent: :destroy
+  has_many :viewed_users, through: :views, source: :user
 end
