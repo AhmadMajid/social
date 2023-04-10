@@ -1,0 +1,35 @@
+<div id="vibration_stats">
+  <div class="d-flex justify-content-start mb-4">
+    <div class="me-4">Views</div>
+    <div class="me-4"><span class="fw-bold"><%= vibration_presenter.revibrations_count %></span> Revibrations</div>
+    <div class="me-4"><span class="fw-bold"><%= vibration_presenter.likes_count %></span> Likes</div>
+  </div>
+
+  <div class="d-flex justify-content-evenly align-items-center action-links">
+    <div>
+      <%= link_to "#", class: "text-decoration-none text-black views" do %>
+        <%= image_tag "bar-graph.png", size: "24x24", class: "me-1" %>
+      <% end %>
+    </div>
+    <div>
+      <%= link_to vibration_path(vibration_presenter.vibration), class: "text-decoration-none text-black replies" do %>
+        <%= image_tag "speech-bubble.png", size: "24x24", class: "me-1" %>
+      <% end %>
+    </div>
+    <div>
+      <%= link_to vibration_presenter.revibration_vibration_url, data: { "turbo-method": vibration_presenter.turbo_revibration_data_method }, class: "text-decoration-none text-black revibrations" do %>
+        <%= image_tag vibration_presenter.revibration_image, size: "24x24", class: "me-1" %>
+      <% end %>
+    </div>
+    <div>
+      <%= link_to vibration_presenter.like_vibration_url, data: { "turbo-method": vibration_presenter.turbo_like_data_method }, class: "text-decoration-none text-black likes" do %>
+        <%= image_tag vibration_presenter.like_heart_image, size: "24x24", class: "me-1" %>
+      <% end %>
+    </div>
+    <div>
+      <%= link_to vibration_presenter.bookmark_vibration_url(source: "vibrations/show"), data: { "turbo-method": vibration_presenter.turbo_bookmark_data_method }, class: "text-decoration-none text-black bookmark" do %>
+        <%= image_tag vibration_presenter.bookmark_image, size: "24x24", class: "me-1" %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -44,11 +44,11 @@ class VibrationPresenter
     end
   end
 
-  def bookmark_vibration_url
+  def bookmark_vibration_url(source: "dashboard/index")
     if vibration_bookmarked_by_current_user?
-      vibration_bookmark_path(vibration, current_user.bookmarks.find_by(vibration: vibration))
+      vibration_bookmark_path(vibration, current_user.bookmarks.find_by(vibration: vibration), source: source)
     else
-      vibration_bookmarks_path(vibration)
+      vibration_bookmarks_path(vibration, source: source)
     end
   end
 
