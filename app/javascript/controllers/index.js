@@ -4,8 +4,8 @@
 
 import { application } from "./application"
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
+import VibrationCardController from "./vibration_card_controller"
+application.register("vibration-card", VibrationCardController)
 
 import VibrationFormController from "./vibration_form_controller"
 application.register("vibration-form", VibrationFormController)

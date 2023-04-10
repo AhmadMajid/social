@@ -1,6 +1,11 @@
 class VibrationsController < ApplicationController
   before_action :authenticate_user!
 
+
+  def show
+    @vibration = Vibration.find(params[:id])
+  end
+
   def create
     @vibration = Vibration.new(vibration_params.merge(user: current_user))
 

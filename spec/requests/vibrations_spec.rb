@@ -1,6 +1,16 @@
 require "rails_helper"
 
 RSpec.describe "Vibrations", type: :request do
+  describe "GET show" do
+    it "succeeds" do
+      user = create(:user)
+      sign_in user
+      vibration = create(:vibration)
+      get vibration_path(vibration)
+      expect(response).to have_http_status(:success)
+    end
+  end
+
   describe "POST create" do
     context "when not signed in" do
       it "is responds with redirect" do

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#index"
 
-  resources :vibrations, only: :create do
+  resources :vibrations, only: [:show, :create] do
     resources :likes, only: [:create, :destroy]
     resources :bookmarks, only: [:create, :destroy]
     resources :revibrations, only: [:create, :destroy]
