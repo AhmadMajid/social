@@ -14,7 +14,7 @@ RSpec.describe VibrationPresenter, type: :presenter do
       it "displays the shortened date format" do
         vibration = create(:vibration)
         vibration.update! created_at: 2.days.ago
-        expect(vibrationPresenter.new(vibration: vibration, current_user: build_stubbed(:user)).created_at).to eq("Sep 1")
+        expect(VibrationPresenter.new(vibration: vibration, current_user: build_stubbed(:user)).created_at).to eq("Sep 1")
       end
     end
 

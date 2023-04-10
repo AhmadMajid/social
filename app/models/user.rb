@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :vibrations, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :liked_vibrations, through: :likes, source: :vibration
+  has_many :bookmarks, dependent: :destroy
+  has_many :bookmarked_vibrations, through: :bookmarks, source: :vibration
 
   validates :username, uniqueness: { case_sensitive: false }, allow_blank: true
 
