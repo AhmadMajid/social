@@ -5,7 +5,7 @@ RSpec.describe "Vibrations", type: :request do
     context "when not signed in" do
       it "is responds with redirect" do
         post vibrations_path, params: {
-          vibrations: {
+          vibration: {
             body: "New vibration body"
           }
         }
@@ -20,7 +20,7 @@ RSpec.describe "Vibrations", type: :request do
         expect do
           post vibrations_path, params: {
             vibration: {
-            body: "New vibration body"
+              body: "New vibration body"
             }
           }
         end.to change { Vibration.count }.by(1)

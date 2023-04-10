@@ -2,6 +2,8 @@ class DashboardController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @vibrations = Vibration.includes(:user).order(created_at: :desc).map { |vibration| VibrationPresenter.new(vibration) }
+    @vibrations = Vibration.includes(:liked_users, :user).order(created_at: :desc).map do |vibration|
+      VibrationPresenter.new(vibration: vibration, current_user: current_user)
+    end
   end
 end
