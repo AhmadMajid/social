@@ -25,9 +25,9 @@
           <% end %>
         </div>
         <div>
-          <%= link_to "#", class: "text-decoration-none text-black revibrations" do %>
-            <%= image_tag "revibration.png", size: "20x20", class: "me-1" %>
-            <span>Revibrations</span>
+          <%= link_to vibration_presenter.revibration_vibration_url, data: { "turbo-method": vibration_presenter.turbo_revibration_data_method }, class: "text-decoration-none text-black revibrations" do %>
+            <%= image_tag vibration_presenter.revibration_image, size: "20x20", class: "me-1" %>
+            <span><%= vibration_presenter.revibrations_count %></span>
           <% end %>
         </div>
         <div>
