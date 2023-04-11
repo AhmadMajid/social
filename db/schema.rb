@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_11_012438) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_11_191535) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -109,6 +109,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_11_012438) do
     t.integer "likes_count", default: 0, null: false
     t.integer "revibrations_count", default: 0, null: false
     t.integer "views_count"
+    t.bigint "parent_vibration_id"
     t.index ["user_id"], name: "index_vibrations_on_user_id"
   end
 
@@ -130,6 +131,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_11_012438) do
   add_foreign_key "revibrations", "users"
   add_foreign_key "revibrations", "vibrations"
   add_foreign_key "vibrations", "users"
+  add_foreign_key "vibrations", "vibrations", column: "parent_vibration_id"
   add_foreign_key "views", "users"
   add_foreign_key "views", "vibrations"
 end
