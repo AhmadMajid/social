@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy]
     resources :bookmarks, only: [:create, :destroy]
     resources :revibrations, only: [:create, :destroy]
+    resources :reply_vibrations, only: :create
   end
 
   get :dashboard, to: "dashboard#index"
