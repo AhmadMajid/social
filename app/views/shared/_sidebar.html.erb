@@ -64,8 +64,7 @@
         <button type="button" class="btn-close mx-0" data-bs-dismiss="modal" aria-label="Close" id="close-modal-btn"></button>
       </div>
       <div class="modal-body">
-        <%= render "shared/vibration_form" %>
-      </div>
+        <%= render "shared/vibration_form", form_submit_path: vibrations_path, button_label: "Vibration" %>      </div>
     </div>
   </div>
 </div>
