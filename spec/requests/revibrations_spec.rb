@@ -6,19 +6,20 @@ RSpec.describe "Vibrations", type: :request do
     let(:vibration) { create(:vibration) }
 
     before { sign_in user }
+    before do
+      sign_in user
+      allow(ViewVibrationJob).to receive(:perform_later)
+    end
 
     it "succeeds" do
       get vibration_path(vibration)
       expect(response).to have_http_status(:success)
     end
 
-    it "increments the view count if the vibration has not been viewed" do
-      expect { get vibration_path(vibration) }.to change { View.count }.by(1)
-    end
 
-    it "does not increment the view count if the vibration already has been viewed" do
-      create(:view, user: user, vibration: vibration)
-      expect { get vibration_path(vibration) }.not_to change { View.count }
+    it "queues up ViewedVibrationJob" do
+      get vibration_path(vibration)
+      expect(ViewVibrationJob).to have_received(:perform_later).with(user: user, vibration: vibration)
     end
   end
 
