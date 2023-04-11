@@ -2,7 +2,7 @@ class VibrationsController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    create_view_record unless View.exists?(user: current_user, vibration: vibration)
+    ViewVibrationJob.perform_later(vibration: vibration, user: current_user)
     @vibration_presenter = VibrationPresenter.new(vibration: vibration, current_user: current_user)
   end
 
@@ -25,9 +25,5 @@ class VibrationsController < ApplicationController
 
   def vibration
     @vibration ||= Vibration.find(params[:id])
-  end
-
-  def create_view_record
-    View.create(vibration: vibration, user: current_user)
   end
 end
