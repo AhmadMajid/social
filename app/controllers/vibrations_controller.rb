@@ -4,6 +4,11 @@ class VibrationsController < ApplicationController
   def show
     ViewVibrationJob.perform_later(vibration: vibration, user: current_user)
     @vibration_presenter = VibrationPresenter.new(vibration: vibration, current_user: current_user)
+    @reply_vibrations_in_presenter = vibration.reply_vibrations.includes(
+      :liked_users, :bookmarked_users, :revibrationed_users, :user
+    ).order(created_at: :desc).map do |reply_vibration|
+      VibrationPresenter.new(vibration: reply_vibration, current_user: current_user)
+    end
   end
 
   def create
