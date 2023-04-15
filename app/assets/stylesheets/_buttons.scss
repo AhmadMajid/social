@@ -12,3 +12,19 @@
     color: $white !important;
   }
 }
+
+.btn-social-outline {
+  background-color: $white;
+  color: $social-blue;
+  border-color: $social-blue;
+  -moz-transition: all .1s ease-in;
+  -o-transition: all .1s ease-in;
+  -webkit-transition: all .1s ease-in;
+  transition: all .1s ease-in;
+  font-weight: 600;
+
+  &:hover {
+    background-color: $social-blue !important;
+    color: $white !important;
+  }
+}

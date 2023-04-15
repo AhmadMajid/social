@@ -4,43 +4,37 @@
       <%= image_tag "social.png", width: "32" %>
     </div>
   <% end %>
-
   <%= link_to dashboard_path, class: "d-flex align-items-center fs-5 mb-3" do %>
     <div class="px-4 py-2 rounded-pill">
       <span class="me-4 position-relative" style="bottom: 3px;"><%= image_tag "home.png", width: "32" %></span>
       Home
     </div>
   <% end %>
-
   <%= link_to "#", class: "d-flex align-items-center fs-5 mb-3" do %>
     <div class="px-4 py-2 rounded-pill">
       <span class="me-4 position-relative" style="bottom: 3px;"><%= image_tag "hashtag.png", width: "32" %></span>
       Explore
     </div>
   <% end %>
-
   <%= link_to "#", class: "d-flex align-items-center fs-5 mb-3" do %>
     <div class="px-4 py-2 rounded-pill">
       <span class="me-4 position-relative" style="bottom: 3px;"><%= image_tag "notifications.png", width: "32" %></span>
       Notifications
     </div>
   <% end %>
-
   <%= link_to "#", class: "d-flex align-items-center fs-5 mb-3" do %>
     <div class="px-4 py-2 rounded-pill">
       <span class="me-4 position-relative" style="bottom: 3px;"><%= image_tag "messages.png", width: "32" %></span>
       Messages
     </div>
   <% end %>
-
   <%= link_to "#", class: "d-flex align-items-center fs-5 mb-3" do %>
     <div class="px-4 py-2 rounded-pill">
       <span class="me-4 position-relative" style="bottom: 3px;"><%= image_tag "bookmark-white.png", width: "32" %></span>
       Bookmarks
     </div>
   <% end %>
-
-  <%= link_to "#", class: "d-flex align-items-center fs-5 mb-4" do %>
+  <%= link_to profile_path, class: "d-flex align-items-center fs-5 mb-4" do %>
     <div class="px-4 py-2 rounded-pill">
       <span class="me-4 position-relative" style="bottom: 3px;"><%= image_tag "profile.png", width: "32" %></span>
       Profile
@@ -48,23 +42,24 @@
   <% end %>
 
   <div class="d-flex align-items-center fs-4 px-4 mb-3">
-    <%= button_tag "Vibration", class: "btn btn-lg btn-social w-100 rounded-pill", data: { "bs-toggle": "modal", "bs-target": "#exampleModal" } %>
+    <%= button_tag "Vibration", class: "btn btn-lg btn-social w-100 rounded-pill", data: { "bs-toggle": "modal", "bs-target": "#vibration-modal" } %>
   </div>
 
   <div class="d-flex align-items-center fs-6 px-4">
-    <%= link_to "Log out", Vibration, data: { "turbo-method": :delete }, class: "social-link" %>
+    <%= link_to "Log out", destroy_user_session_path, data: { "turbo-method": :delete }, class: "social-link" %>
   </div>
 </aside>
 
 <!-- Vibration Form Modal -->
-<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="vibration-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
         <button type="button" class="btn-close mx-0" data-bs-dismiss="modal" aria-label="Close" id="close-modal-btn"></button>
       </div>
       <div class="modal-body">
-        <%= render "shared/vibration_form", form_submit_path: vibrations_path, button_label: "Vibration" %>      </div>
+        <%= render "shared/vibration_form", form_submit_path: vibrations_path, button_label: "vibration" %>
+      </div>
     </div>
   </div>
 </div>
