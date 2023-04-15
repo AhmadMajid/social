@@ -1,3 +1,6 @@
 <%= turbo_stream.prepend "reply_vibrations" do %>
-  <%= render partial: "vibrations/vibration", locals: { vibration_presenter: VibrationPresenter.new(vibration: @vibration.reload, current_user: current_user.reload) }%>
+  <%= render partial: "vibrations/vibration", locals: { vibration_presenter: VibrationPresenter.new(vibration: @vibration, current_user: current_user) }%>
+<% end %>
+<%= turbo_stream.replace "vibration_stats" do %>
+  <%= render partial: "vibrations/show_stats", locals: { vibration_presenter: VibrationPresenter.new(vibration: @vibration.parent_vibration, current_user: current_user) } %>
 <% end %>

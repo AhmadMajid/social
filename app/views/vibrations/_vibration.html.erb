@@ -21,7 +21,7 @@
         <div>
           <%= link_to vibration_path(vibration_presenter.vibration), data: { "ignore-click": true }, class: "text-decoration-none text-black replies" do %>
             <%= image_tag "speech-bubble.png", size: "20x20", class: "me-1" %>
-            <span>Replies</span>
+            <span><%= vibration_presenter.reply_vibrations_count %></span>
           <% end %>
         </div>
         <div>

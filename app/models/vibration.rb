@@ -10,6 +10,11 @@ class Vibration < ApplicationRecord
   has_many :revibrationed_users, through: :revibrations, source: :user
   has_many :views, dependent: :destroy
   has_many :viewed_users, through: :views, source: :user
-  belongs_to :parent_vibration, inverse_of: :reply_vibrations, foreign_key: :parent_vibration_id, class_name: "Vibration", optional: true
+  belongs_to :parent_vibration,
+             inverse_of: :reply_vibrations,
+             foreign_key: :parent_vibration_id,
+             class_name: "Vibration",
+             optional: true,
+             counter_cache: :reply_vibrations_count
   has_many :reply_vibrations, foreign_key: :parent_vibration_id, class_name: "Vibration"
 end
