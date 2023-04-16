@@ -7,7 +7,9 @@
 
     <div data-vibration-path="<%= vibration_path(@vibration_presenter.vibration) %>" class="vibration d-flex py-3 px-3">
       <div class="flex-shrink-0">
-        <%= image_tag @vibration_presenter.avatar, size: "48x48", class: "rounded-circle" %>
+        <%= link_to user_path(@vibration_presenter.user) do %>
+          <%= image_tag @vibration_presenter.avatar, size: "48x48", class: "rounded-circle" %>
+        <% end %>
       </div>
       <div class="flex-grow-1 ms-3">
         <p class="fw-bolder mb-0"><%= @vibration_presenter.display_name %></p>
