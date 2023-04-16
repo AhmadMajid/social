@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_16_105317) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_16_141108) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -103,6 +103,30 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_16_105317) do
     t.index ["vibration_id"], name: "index_likes_on_vibration_id"
   end
 
+  create_table "message_threads", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "message_threads_users", id: false, force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "message_thread_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_thread_id"], name: "index_message_threads_users_on_message_thread_id"
+    t.index ["user_id"], name: "index_message_threads_users_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "body", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "message_thread_id", null: false
+    t.index ["message_thread_id"], name: "index_messages_on_message_thread_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "revibrations", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "vibration_id", null: false
@@ -162,6 +186,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_16_105317) do
   add_foreign_key "followings", "users", column: "following_user_id"
   add_foreign_key "likes", "users"
   add_foreign_key "likes", "vibrations"
+  add_foreign_key "messages", "message_threads"
+  add_foreign_key "messages", "users"
   add_foreign_key "revibrations", "users"
   add_foreign_key "revibrations", "vibrations"
   add_foreign_key "vibrations", "users"
