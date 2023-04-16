@@ -33,6 +33,11 @@ RSpec.describe Vibration, type: :model do
           Vibration.create(user: user, body: "mary had a #little #lamb")
         end.to change { Hashtag.count }.by(2)
       end
+
+      it "creates hastags assigned to the vibration" do
+        vibration = Vibration.create(user: user, body: "mary had a #little #lamb")
+        expect(vibration.hashtags.size).to eq(2)
+      end
     end
 
     context "when there are duplicate hashtags in the body" do
