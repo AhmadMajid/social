@@ -3,6 +3,9 @@ class ProfileController < ApplicationController
 
   def show
     @user = current_user
+    @vibration_presenters = @user.vibrations.map do |vibration|
+      VibrationPresenter.new(vibration: vibration, current_user: @user)
+    end
     render "users/show"
   end
 
