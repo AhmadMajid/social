@@ -12,7 +12,7 @@
       <div class="flex-grow-1 ms-3">
         <p class="fw-bolder mb-0"><%= @vibration_presenter.display_name %></p>
         <p class="text-muted mb-1">@<%= @vibration_presenter.username %></p>
-        <p class="fs-2 mb-1"><%= @vibration_presenter.body %></p>
+        <%= @vibration_presenter.body_html(p_class: "fs-2 mb-1").html_safe %>
         <p class="text-muted"><%= @vibration_presenter.vibration.created_at.strftime("%l:%M %p") %> · <%= @vibration_presenter.vibration.created_at.strftime("%b %d, %Y") %></p>
 
         <%= render "show_stats", vibration_presenter: @vibration_presenter %>

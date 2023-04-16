@@ -9,7 +9,7 @@ class VibrationPresenter
 
   attr_reader :vibration, :current_user
 
-  delegate :user, :likes_count, :revibrations_count, :views_count, :reply_vibrations_count, to: :vibration
+  delegate :user, :body, :likes_count, :revibrations_count, :views_count, :reply_vibrations_count, to: :vibration
   delegate :display_name, :username, to: :user
 
   def created_at
@@ -20,7 +20,7 @@ class VibrationPresenter
     end
   end
 
-  def body_html
+  def body_html(p_class: "")
     texts = vibration.body.split(" ").map do |word|
       if word.include?("#")
         "<a class=\"social-link\">#{word}</a>"
@@ -28,7 +28,7 @@ class VibrationPresenter
         word
       end
     end
-    "<p>#{texts.join(" ")}</p>"
+    "<p class=\"#{p_class}\">#{texts.join(" ")}</p>"
   end
 
   def avatar
