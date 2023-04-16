@@ -30,7 +30,7 @@ Rails.application.routes.draw do
     resources :messages, only: :index
   end
 
-  resources :message_threads, only: :index, path: "/messages"
-
   resources :messages, only: :create
+
+  resources :notifications, only: :index
 end
