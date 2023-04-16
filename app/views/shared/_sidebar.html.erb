@@ -28,7 +28,7 @@
       Messages
     </div>
   <% end %>
-  <%= link_to "#", class: "d-flex align-items-center fs-5 mb-3" do %>
+  <%= link_to bookmarks_path, class: "d-flex align-items-center fs-5 mb-3" do %>
     <div class="px-4 py-2 rounded-pill">
       <span class="me-4 position-relative" style="bottom: 3px;"><%= image_tag "bookmark-white.png", width: "32" %></span>
       Bookmarks
@@ -58,7 +58,7 @@
         <button type="button" class="btn-close mx-0 close-modal-btn" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= render "shared/vibration_form", form_submit_path: vibrations_path, button_label: "Vibration" %>
+        <%= render "shared/vibration_form", form_submit_path: vibrations_path, button_label: "Vibratiion" %>
       </div>
     </div>
   </div>
