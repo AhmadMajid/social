@@ -24,6 +24,10 @@
     </div>
 
     <%= render "users/profile_section", user: @user %>
+
+    <div id="vibrations">
+      <%= render partial: "vibrations/vibration", collection: @vibration_presenters, as: :vibration_presenter %>
+    </div>
   </div>
 </div>
 <div class="col">
