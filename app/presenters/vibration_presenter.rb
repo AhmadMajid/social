@@ -7,10 +7,10 @@ class VibrationPresenter
     @current_user = user
   end
 
-  attr_reader :vibration, :current_user
-
   delegate :user, :body, :likes_count, :revibrations_count, :views_count, :reply_vibrations_count, to: :vibration
   delegate :display_name, :username, to: :user
+
+  attr_reader :vibration, :current_user
 
   def created_at
     if (Time.zone.now - vibration.created_at) > 1.day
