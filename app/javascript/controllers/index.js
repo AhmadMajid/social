@@ -7,6 +7,9 @@ import { application } from "./application"
 import HashtagController from "./hashtag_controller"
 application.register("hashtag", HashtagController)
 
+import MessagesController from "./messages_controller"
+application.register("messages", MessagesController)
+
 import VibrationCardController from "./vibration_card_controller"
 application.register("vibration-card", VibrationCardController)
 
