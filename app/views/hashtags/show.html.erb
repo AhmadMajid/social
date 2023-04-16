@@ -4,7 +4,8 @@
       <%= image_tag "back-arrow.png", size: "28x28", class: "me-4" %>
       <span style="position: relative; top: 2px;"><%= @hashtag.tag %></span>
     <% end %>
-    <%= render "vibrations/vibration", collection: @vibration_presenters, as: :vibration_presenter %>
+
+    <%= render partial: "vibrations/vibration", collection: @vibration_presenters, as: :vibration_presenter %>
   </div>
 </div>
 <div class="col">
