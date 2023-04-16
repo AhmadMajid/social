@@ -1,0 +1,11 @@
+<div class="col-7">
+  <div class="mb-3">
+    <%= link_to "Bookmarks", bookmarks_path, class: "fs-4 text-decoration-none text-black fw-semibold" %>
+  </div>
+  <div id="vibrations">
+    <%= render partial: "vibrations/vibration", collection: @vibration_presenters, as: :vibration_presenter %>
+  </div>
+</div>
+<div class="col">
+  Column
+</div>
