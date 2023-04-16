@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_16_141108) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_16_222059) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -127,6 +127,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_16_141108) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "actor_id", null: false
+    t.bigint "vibration_id"
+    t.string "verb", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["actor_id"], name: "index_notifications_on_actor_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+    t.index ["vibration_id"], name: "index_notifications_on_vibration_id"
+  end
+
   create_table "revibrations", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "vibration_id", null: false
@@ -188,6 +200,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_16_141108) do
   add_foreign_key "likes", "vibrations"
   add_foreign_key "messages", "message_threads"
   add_foreign_key "messages", "users"
+  add_foreign_key "notifications", "users"
+  add_foreign_key "notifications", "users", column: "actor_id"
+  add_foreign_key "notifications", "vibrations"
   add_foreign_key "revibrations", "users"
   add_foreign_key "revibrations", "vibrations"
   add_foreign_key "vibrations", "users"
