@@ -3,6 +3,7 @@ class LikesController < ApplicationController
 
   def create
     @like = current_user.likes.create(vibration: vibration)
+    Notification.create(user: vibration.user, actor: current_user, verb: "liked-vibration", vibration: vibration)
     respond_to do |format|
       format.html { redirect_to dashboard_path }
       format.turbo_stream

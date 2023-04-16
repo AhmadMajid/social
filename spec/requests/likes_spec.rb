@@ -13,6 +13,12 @@ RSpec.describe "Likes", type: :request do
       end.to change { Like.count }.by(1)
       expect(response).to have_http_status(:redirect)
     end
+
+    it "creates a new notification" do
+      expect do
+        post vibration_likes_path(vibration)
+      end.to change { Notification.count }.by(1)
+    end
   end
 
   describe "DELETE destroy" do
