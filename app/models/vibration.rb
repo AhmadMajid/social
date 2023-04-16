@@ -10,6 +10,7 @@ class Vibration < ApplicationRecord
   has_many :revibrationed_users, through: :revibrations, source: :user
   has_many :views, dependent: :destroy
   has_many :viewed_users, through: :views, source: :user
+  has_and_belongs_to_many :hashtags
   belongs_to :parent_vibration,
              inverse_of: :reply_vibrations,
              foreign_key: :parent_vibration_id,
