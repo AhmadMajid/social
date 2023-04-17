@@ -14,6 +14,12 @@ RSpec.describe "Likes", type: :request do
       expect(response).to have_http_status(:redirect)
     end
 
+    it "creates a new vibration activity" do
+      expect do
+        post vibration_likes_path(vibration)
+      end.to change { VibrationActivity.count }.by(1)
+    end
+
     it "creates a new notification" do
       expect do
         post vibration_likes_path(vibration)
