@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_17_001036) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_17_011937) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -177,6 +177,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_17_001036) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "vibration_activities", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "vibration_id", null: false
+    t.string "verb", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_vibration_activities_on_user_id"
+    t.index ["vibration_id"], name: "index_vibration_activities_on_vibration_id"
+  end
+
   create_table "vibrations", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "body"
@@ -216,6 +226,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_17_001036) do
   add_foreign_key "notifications", "vibrations"
   add_foreign_key "revibrations", "users"
   add_foreign_key "revibrations", "vibrations"
+  add_foreign_key "vibration_activities", "users"
+  add_foreign_key "vibration_activities", "vibrations"
   add_foreign_key "vibrations", "users"
   add_foreign_key "vibrations", "vibrations", column: "parent_vibration_id"
   add_foreign_key "views", "users"
