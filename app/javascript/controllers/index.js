@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import DashboardVibrationsController from "./dashboard_vibrations_controller"
+application.register("dashboard-vibrations", DashboardVibrationsController)
+
 import HashtagController from "./hashtag_controller"
 application.register("hashtag", HashtagController)
 
