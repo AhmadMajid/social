@@ -70,6 +70,12 @@ RSpec.describe Vibration, type: :model do
           Vibration.create(user: user, body: "this is a test mention vibration for @foobar")
         end.to change { Mention.count }.by(1)
       end
+      it "creates a new notification" do
+        user = User.create(email: "foo@bar.com", username: "foobar", password: "password")
+        expect do
+          Vibration.create(user: user, body: "this is a test mention vibration for @foobar")
+        end.to change { Notification.count }.by(1)
+      end
     end
   end
 end
