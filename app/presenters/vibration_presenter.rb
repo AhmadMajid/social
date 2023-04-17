@@ -22,7 +22,7 @@ class VibrationPresenter
 
   def body_html(p_class: "")
     texts = vibration.body.split(" ").map do |word|
-      if word.include?("#")
+      if word.include?("#") || word.include?("@")
         "<a class=\"social-link\">#{word}</a>"
       else
         word

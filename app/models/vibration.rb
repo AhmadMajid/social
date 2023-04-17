@@ -20,6 +20,8 @@ class Vibration < ApplicationRecord
              optional: true,
              counter_cache: :reply_vibrations_count
   has_many :reply_vibrations, foreign_key: :parent_vibration_id, class_name: "Vibration"
+  has_many :mentions, dependent: :destroy
+  has_many :mentioned_users, through: :mentions
 
   before_save :parse_and_save_hashtags
   def parse_and_save_hashtags
@@ -29,6 +31,19 @@ class Vibration < ApplicationRecord
     matches.flatten.each do |tag|
       hashtag = Hashtag.find_or_create_by(tag: tag.delete("#"))
       hashtags << Hashtag.find_or_create_by(tag: tag.delete("#"))
+    end
+  end
+
+  after_save :parse_and_save_mentions
+  def parse_and_save_mentions
+    matches = body.scan(/(@\w+)/)
+    return if matches.empty?
+
+    matches.flatten.each do |mention|
+      mentioned_user = User.find_by(username: mention.delete("@"))
+      next if mentioned_user.blank?
+
+      mentions.find_or_create_by(mentioned_user: mentioned_user)
     end
   end
 end
