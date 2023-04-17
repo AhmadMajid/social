@@ -5,35 +5,56 @@
   <div id="vibrations">
     <% @notifications.each do |notification| %>
       <% if notification.followed_me? %>
-        <div>
-          <% if notification.actor.avatar.present? %>
-            <%= image_tag notification.actor.avatar, size: "48x48", class: "rounded-circle" %>
-          <% else %>
-            <%= image_tag "user.png", size: "48x48", class: "rounded-circle" %>
-          <% end %>
-          <p><span class="fw-bold"><%= notification.actor.display_name %></span> followed you</p>
-        </div>
+        <%= turbo_frame_tag dom_id(notification) do %>
+          <div class="notification d-flex justify-content-between py-2 px-3">
+            <div>
+              <% if notification.actor.avatar.present? %>
+                <%= image_tag notification.actor.avatar, size: "48x48", class: "rounded-circle" %>
+              <% else %>
+                <%= image_tag "user.png", size: "48x48", class: "rounded-circle" %>
+              <% end %>
+              <p class="mb-1"><span class="fw-bold"><%= notification.actor.display_name %></span> followed you</p>
+            </div>
+            <div>
+              <%= link_to "", notification_path(notification), data: { "turbo-method": :delete }, class: "d-block btn-close" %>
+            </div>
+          </div>
+        <% end %>
       <% elsif notification.liked_vibration? %>
-        <div>
-          <% if notification.actor.avatar.present? %>
-            <%= image_tag notification.actor.avatar, size: "48x48", class: "rounded-circle" %>
-          <% else %>
-            <%= image_tag "user.png", size: "48x48", class: "rounded-circle" %>
-          <% end %>
-          <p class="mb-1"><span class="fw-bold"><%= notification.actor.display_name %></span> liked your vibration</p>
-          <p class="text-muted mb-1"><%= notification.vibration.body %></p>
-          <%= link_to "Show all", vibration_path(notification.vibration), class: "vibration-link mb-1" %>
-        </div>
+        <%= turbo_frame_tag dom_id(notification) do %>
+          <div class="notification d-flex justify-content-between py-2 px-3">
+            <div>
+              <% if notification.actor.avatar.present? %>
+                <%= image_tag notification.actor.avatar, size: "48x48", class: "rounded-circle" %>
+              <% else %>
+                <%= image_tag "user.png", size: "48x48", class: "rounded-circle" %>
+              <% end %>
+              <p class="mb-1"><span class="fw-bold"><%= notification.actor.display_name %></span> liked your vibration</p>
+              <p class="text-muted mb-1"><%= notification.vibration.body %></p>
+              <%= link_to "Show all", vibration_path(notification.vibration), class: "vibration-link mb-1" %>
+            </div>
+            <div>
+              <%= link_to "", notification_path(notification), data: { "turbo-method": :delete }, class: "d-block btn-close" %>
+            </div>
+          </div>
+        <% end %>
       <% elsif notification.mentioned_me? %>
-        <div>
-          <% if notification.actor.avatar.present? %>
-            <%= image_tag notification.actor.avatar, size: "48x48", class: "rounded-circle" %>
-          <% else %>
-            <%= image_tag "user.png", size: "48x48", class: "rounded-circle" %>
-          <% end %>
-        </div>
-        <p class="mb-1"><span class="fw-bold"><%= notification.actor.display_name %></span> mentioned you</p>
-        <%= link_to "Show @#{notification.actor.username}", user_path(notification.actor), class: "vibration-link mb-1" %>
+        <%= turbo_frame_tag dom_id(notification) do %>
+          <div class="notification d-flex justify-content-between py-2 px-3">
+            <div>
+              <% if notification.actor.avatar.present? %>
+                <%= image_tag notification.actor.avatar, size: "48x48", class: "rounded-circle" %>
+              <% else %>
+                <%= image_tag "user.png", size: "48x48", class: "rounded-circle" %>
+              <% end %>
+              <p class="mb-1"><span class="fw-bold"><%= notification.actor.display_name %></span> mentioned you</p>
+              <%= link_to "Show @#{notification.actor.username}", user_path(notification.actor), class: "vibration-link mb-1" %>
+            </div>
+            <div>
+              <%= link_to "", notification_path(notification), data: { "turbo-method": :delete }, class: "d-block btn-close" %>
+            </div>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
   </div>
