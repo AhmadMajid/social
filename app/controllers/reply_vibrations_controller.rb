@@ -2,9 +2,10 @@ class ReplyVibrationsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @vibration = vibration.reply_vibrations.create(vibration_params.merge(user: current_user))
+    @reply_vibration = vibration.reply_vibrations.create(vibration_params.merge(user: current_user))
+    VibrationActivity.create(user: vibration.user, actor: current_user, vibration: vibration, verb: "replied")
 
-    if @vibration.save
+    if @reply_vibration.save
       respond_to do |format|
         format.html { redirect_to dashboard_path }
         format.turbo_stream
