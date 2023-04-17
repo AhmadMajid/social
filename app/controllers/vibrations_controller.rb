@@ -12,9 +12,10 @@ class VibrationsController < ApplicationController
   end
 
   def create
-    @vibration = Vibration.new(vibration_params.merge(user: current_user))
+    @vibration = Vibration.create(vibration_params.merge(user: current_user))
+    VibrationActivity::VibrationedJob.perform_later(actor: current_user, vibration: @vibration)
 
-    if @vibration.save
+    if @vibration.persisted?
       respond_to do |format|
         format.html { redirect_to dashboard_path }
         format.turbo_stream
