@@ -3,7 +3,7 @@ class ReplyVibrationsController < ApplicationController
 
   def create
     @reply_vibration = vibration.reply_vibrations.create(vibration_params.merge(user: current_user))
-    VibrationActivity.create(user: vibration.user, actor: current_user, vibration: vibration, verb: "replied")
+    VibrationActivity.create(user: current_user, actor: current_user, vibration: vibration, verb: "replied")
 
     if @reply_vibration.save
       respond_to do |format|
