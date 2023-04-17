@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_17_011937) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_17_014531) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -183,6 +183,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_17_011937) do
     t.string "verb", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "actor_id", null: false
+    t.index ["actor_id"], name: "index_vibration_activities_on_actor_id"
     t.index ["user_id"], name: "index_vibration_activities_on_user_id"
     t.index ["vibration_id"], name: "index_vibration_activities_on_vibration_id"
   end
@@ -227,6 +229,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_17_011937) do
   add_foreign_key "revibrations", "users"
   add_foreign_key "revibrations", "vibrations"
   add_foreign_key "vibration_activities", "users"
+  add_foreign_key "vibration_activities", "users", column: "actor_id"
   add_foreign_key "vibration_activities", "vibrations"
   add_foreign_key "vibrations", "users"
   add_foreign_key "vibrations", "vibrations", column: "parent_vibration_id"
