@@ -13,16 +13,14 @@ class VibrationPresenter
 
   attr_reader :vibration, :current_user, :vibration_activity
 
-  def render_vibration_activity?
-    return false unless vibration_activity
-
-    vibration_activity.verb.in?(VibrationActivity::VERBS - %w[vibrationed])
-  end
-
   def vibration_activity_html
     case vibration_activity.verb
     when "liked"
       "<p class=\"fw-bold fs-6 text-muted mb-0\" style=\"margin-left: 5rem; font-size: 13px !important;\">#{vibration_activity.actor.display_name} liked</p>"
+    when "replied"
+      "<p class=\"fw-bold fs-6 text-muted mb-0\" style=\"margin-left: 5rem; font-size: 13px !important;\">#{vibration_activity.actor.display_name} replied to</p>"
+    else
+      ""
     end
   end
 

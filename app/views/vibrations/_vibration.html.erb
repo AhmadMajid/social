@@ -1,6 +1,4 @@
-<% if vibration_presenter.render_vibration_activity? %>
-  <%= vibration_presenter.vibration_activity_html.html_safe %>
-<% end %>
+<%= vibration_presenter.vibration_activity_html.html_safe %>
 <%= turbo_frame_tag dom_id(vibration_presenter.vibration) do %>
   <div data-controller="vibration-card" data-vibration-path="<%= vibration_path(vibration_presenter.vibration) %>" class="vibration hover d-flex py-3 px-3">
     <div class="flex-shrink-0">
