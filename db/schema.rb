@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_16_222059) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_17_001036) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -101,6 +101,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_16_222059) do
     t.index ["user_id", "vibration_id"], name: "index_likes_on_user_id_and_vibration_id", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
     t.index ["vibration_id"], name: "index_likes_on_vibration_id"
+  end
+
+  create_table "mentions", force: :cascade do |t|
+    t.bigint "vibration_id", null: false
+    t.bigint "mentioned_user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mentioned_user_id"], name: "index_mentions_on_mentioned_user_id"
+    t.index ["vibration_id"], name: "index_mentions_on_vibration_id"
   end
 
   create_table "message_threads", force: :cascade do |t|
@@ -198,6 +207,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_16_222059) do
   add_foreign_key "followings", "users", column: "following_user_id"
   add_foreign_key "likes", "users"
   add_foreign_key "likes", "vibrations"
+  add_foreign_key "mentions", "users", column: "mentioned_user_id"
+  add_foreign_key "mentions", "vibrations"
   add_foreign_key "messages", "message_threads"
   add_foreign_key "messages", "users"
   add_foreign_key "notifications", "users"
