@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     redirect_to profile_path if params[:id].to_i == current_user.id
     @user = User.find(params[:id])
     @vibration_presenters = @user.vibrations.order(created_at: :desc).map do |vibration|
-      VibrationPresenter.new(vibration: vibration, current_user: @user)
+      VibrationPresenter.new(vibration: vibration, current_user: current_user)
     end
   end
 end
