@@ -2,15 +2,29 @@ class VibrationPresenter
   include ActionView::Helpers::DateHelper
   include Rails.application.routes.url_helpers
 
-  def initialize(vibration:, current_user:)
+  def initialize(vibration:, current_user:, vibration_activity: nil)
     @vibration = vibration
     @current_user = user
+    @vibration_activity = vibration_activity
   end
 
   delegate :user, :body, :likes_count, :revibrations_count, :views_count, :reply_vibrations_count, to: :vibration
   delegate :display_name, :username, to: :user
 
-  attr_reader :vibration, :current_user
+  attr_reader :vibration, :current_user, :vibration_activity
+
+  def render_vibration_activity?
+    return false unless vibration_activity
+
+    vibration_activity.verb.in?(VibrationActivity::VERBS - %w[vibrationed])
+  end
+
+  def vibration_activity_html
+    case vibration_activity.verb
+    when "liked"
+      "<p class=\"fw-bold fs-6 text-muted mb-0\" style=\"margin-left: 5rem; font-size: 13px !important;\">#{vibration_activity.actor.display_name} liked</p>"
+    end
+  end
 
   def created_at
     if (Time.zone.now - vibration.created_at) > 1.day

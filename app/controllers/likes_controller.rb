@@ -14,6 +14,7 @@ class LikesController < ApplicationController
   def destroy
     @like = vibration.likes.find(params[:id])
     @like.destroy
+    VibrationActivity.where(user: vibration.user, actor: current_user, vibration: vibration, verb: "liked").destroy_all
     respond_to do |format|
       format.html { redirect_to dashboard_path }
       format.turbo_stream
