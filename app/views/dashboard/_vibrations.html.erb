@@ -1,0 +1,11 @@
+<div
+  data-controller="dashboard-vibrations"
+  data-next-page="<%= vibration_activities_data[:next_page] %>"
+  data-last-page="<%= vibration_activities_data[:last_page] %>"
+>
+  <%= render partial: "vibrations/vibration", collection: @vibration_activities_data[:vibration_activities], as: :vibration_presenter %>
+</div>
+
+<script>
+  console.log('new partial rendered');
+</script>
