@@ -22,3 +22,5 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+jobs: ```bundle exec rails jobs:work ```
+server: ```./bin/dev```
