@@ -2,6 +2,7 @@
   class="col-7"
   id="dashboard-vibrations"
   data-controller="dashboard-vibrations vibration-polling"
+  data-latest-vibration-id="<%= @vibration_activities_data[:vibration_activities].first&.id %>"
   data-next-page="<%= @vibration_activities_data[:next_page] %>"
   data-last-page="<%= @vibration_activities_data[:last_page] %>"
 >

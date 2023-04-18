@@ -1,0 +1,5 @@
+<% if @vibration_activities.present? %>
+<%= turbo_stream.prepend "vibrations" do %>
+  <%= render partial: "dashboard/vibrations", locals: { vibration_activities_data: @vibration_activities_data } %>
+<% end %>
+<% end %>
