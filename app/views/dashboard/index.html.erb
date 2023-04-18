@@ -5,13 +5,8 @@
   <div class="mb-4">
     <%= render "shared/vibration_form", form_submit_path: vibrations_path, button_label: "Vibration" %>
   </div>
-  <div
-    id="vibrations"
-    data-controller="dashboard-vibrations"
-    data-next-page="<%= @vibration_activities_data[:next_page] %>"
-    data-last-page="<%= @vibration_activities_data[:last_page] %>"
-  >
-<%= render partial: "vibrations/vibration", collection: @vibration_activities_data[:vibration_activities], as: :vibration_presenter %>
+  <div id="vibrations">
+    <%= render "dashboard/vibrations", vibration_activities_data: @vibration_activities_data %>
   </div>
 </div>
 <div class="col">
