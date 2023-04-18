@@ -18,3 +18,6 @@ application.register("vibration-card", VibrationCardController)
 
 import VibrationFormController from "./vibration_form_controller"
 application.register("vibration-form", VibrationFormController)
+
+import VibrationPollingController from "./vibration_polling_controller"
+application.register("vibration-polling", VibrationPollingController)
