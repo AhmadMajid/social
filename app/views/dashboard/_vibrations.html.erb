@@ -1,11 +1,7 @@
-<div
-  data-controller="dashboard-vibrations"
-  data-next-page="<%= vibration_activities_data[:next_page] %>"
-  data-last-page="<%= vibration_activities_data[:last_page] %>"
->
+<div>
   <%= render partial: "vibrations/vibration", collection: @vibration_activities_data[:vibration_activities], as: :vibration_presenter %>
 </div>
-
 <script>
-  console.log('new partial rendered');
+  document.getElementById('dashboard-vibrations').dataset.nextPage = '<%= vibration_activities_data[:next_page] %>';
+  document.getElementById('dashboard-vibrations').dataset.lastPage = '<%= vibration_activities_data[:last_page] %>';
 </script>
