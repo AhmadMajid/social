@@ -8,7 +8,7 @@ class VibrationPresenter
     @vibration_activity = vibration_activity
   end
 
-  delegate :user, :body, :likes_count, :revibrations_count, :views_count, :reply_vibrations_count, to: :vibration
+  delegate :id, :user, :body, :likes_count, :revibrations_count, :views_count, :reply_vibrations_count, to: :vibration
   delegate :display_name, :username, to: :user
 
   attr_reader :vibration, :current_user, :vibration_activity
