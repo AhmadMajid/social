@@ -33,4 +33,6 @@ Rails.application.routes.draw do
   resources :messages, only: :create
 
   resources :notifications, only: [:index, :destroy]
+
+  get "/vibration_polling", to: "vibration_polling#index"
 end
